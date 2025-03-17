@@ -41,7 +41,7 @@ The system leverages CUDA for GPU-accelerated image processing (e.g., converting
 
 1. **Install Dependencies**:
    - Ensure CUDA Toolkit is installed and configured on your system.
-   - Include Cyclone DDS in your project (e.g., via a plugin or submodule).
+   - Include Cyclone DDS in your project (e.g., via a plugin or submodule. I have a separate Cyclonedds plugin in another repo).
 
 2. **Project Configuration**:
    - Place the code in your Unreal Engine project’s plugin or module directory.
