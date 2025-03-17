@@ -1,0 +1,42 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Parallel Computing Module",
+	"Description": "OpenCL and/or CUDA integration for UE5.3 with CycloneDDS support.",
+	"Category": "GPGPU",
+	"MarketplaceURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "GPGPUPlugin",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"Win64",
+				"Linux"
+			]
+		},
+		{
+			"Name": "GPGPUPluginEditor",
+			"Type": "Editor",
+			"PlatformAllowList": [
+				"Win64",
+				"Linux"
+			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "CycloneDDS",
+			"Enabled": true
+		}
+	],
+	"EngineVersion": "5.3.0",
+	"SupportedTargetPlatforms": [
+		"Win64",
+		"Linux"
+	]
+}

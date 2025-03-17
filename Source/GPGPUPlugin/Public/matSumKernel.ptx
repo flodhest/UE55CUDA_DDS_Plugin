@@ -1,0 +1,46 @@
+.version 8.7
+.target sm_89
+.address_size 64
+.visible .entry RgbaToRgbKernel(
+    .param .u64 RgbaToRgbKernel_param_0,
+    .param .u64 RgbaToRgbKernel_param_1,
+    .param .u32 RgbaToRgbKernel_param_2,
+    .param .u32 RgbaToRgbKernel_param_3
+)
+{
+    .reg .pred  %p<2>;
+    .reg .b16   %rs<4>;
+    .reg .b32   %r<12>;
+    .reg .b64   %rd<11>;
+    ld.param.u64    %rd1, [RgbaToRgbKernel_param_0];
+    ld.param.u64    %rd2, [RgbaToRgbKernel_param_1];
+    ld.param.u32    %r2, [RgbaToRgbKernel_param_2];
+    ld.param.u32    %r3, [RgbaToRgbKernel_param_3];
+    mov.u32     %r4, %ntid.x;
+    mov.u32     %r5, %ctaid.x;
+    mov.u32     %r6, %tid.x;
+    mad.lo.s32  %r1, %r5, %r4, %r6;
+    mul.lo.s32  %r7, %r3, %r2;
+    setp.ge.s32     %p1, %r1, %r7;
+    @%p1 bra    $L__BB0_2;
+    cvta.to.global.u64  %rd3, %rd2;
+    shl.b32     %r8, %r1, 2;
+    cvt.s64.s32     %rd4, %r8;
+    cvta.to.global.u64  %rd5, %rd1;
+    add.s64     %rd6, %rd5, %rd4;
+    ld.global.u8    %rs1, [%rd6];
+    mul.lo.s32  %r9, %r1, 3;
+    cvt.s64.s32     %rd7, %r9;
+    add.s64     %rd8, %rd3, %rd7;
+    st.global.u8    [%rd8], %rs1;
+    or.b32      %r10, %r8, 1;
+    ld.global.u8    %rs2, [%rd6+1];
+    sub.s32     %r11, %r10, %r1;
+    cvt.s64.s32     %rd9, %r11;
+    add.s64     %rd10, %rd3, %rd9;
+    st.global.u8    [%rd10], %rs2;
+    ld.global.u8    %rs3, [%rd6+2];
+    st.global.u8    [%rd10+1], %rs3;
+$L__BB0_2:
+    ret;
+}
